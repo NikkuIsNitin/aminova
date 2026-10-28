@@ -103,6 +103,14 @@
   animation: stretch 1.8s ease-in-out infinite;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes drift {
   0%,
   100% {

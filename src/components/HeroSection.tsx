@@ -8,9 +8,9 @@ import {
   useTransform,
 } from "framer-motion"
 import { bottleProducts } from "../data/products.ts"
-import { formatINR } from "../lib/format.ts"
 import { cn } from "../lib/cn.ts"
 import { Button } from "./Button.tsx"
+import { FlavourScroller } from "./FlavourScroller.tsx"
 
 export function HeroSection() {
   const [activeId, setActiveId] = useState(bottleProducts[0].id)
@@ -20,8 +20,6 @@ export function HeroSection() {
   const py = useMotionValue(0)
   const spx = useSpring(px, { stiffness: 70, damping: 18, mass: 0.4 })
   const spy = useSpring(py, { stiffness: 70, damping: 18, mass: 0.4 })
-  const rotateY = useTransform(spx, [-0.5, 0.5], [-8, 8])
-  const rotateX = useTransform(spy, [-0.5, 0.5], [6, -6])
   const motifX = useTransform(spx, [-0.5, 0.5], [-16, 16])
   const motifY = useTransform(spy, [-0.5, 0.5], [-12, 12])
 
@@ -131,44 +129,24 @@ export function HeroSection() {
           <span className="droplet bottom-[20%] left-[12%] h-4 w-4" style={{ animationDelay: "1.2s" }} />
           <span className="droplet right-[14%] bottom-[10%] h-2.5 w-2.5" style={{ animationDelay: "0.4s" }} />
 
-          <motion.div
-            className="relative mx-auto w-fit max-w-full"
-            style={
-              reduce
-                ? undefined
-                : { rotateX, rotateY, transformStyle: "preserve-3d", transformPerspective: 1100 }
-            }
-          >
-            <div className="relative">
-              {bottleProducts.map((product, index) => (
-                <img
-                  key={product.id}
-                  src={product.image}
-                  alt={product.id === active.id ? product.imageAlt : ""}
-                  width={720}
-                  height={1024}
-                  decoding={index === 0 ? "async" : "async"}
-                  fetchPriority={product.id === "aminova-orange" ? "high" : "low"}
-                  className={cn(
-                    "rounded-[1.7rem] object-contain shadow-[0_30px_70px_-28px_rgba(16,63,53,0.55)] transition-opacity duration-500",
-                    "max-h-[min(560px,58vh)] w-auto max-w-full lg:max-h-[min(740px,calc(100svh-8.5rem))]",
-                    index === 0 ? "relative" : "absolute inset-0 h-full w-full",
-                    product.id === active.id ? "opacity-100" : "pointer-events-none opacity-0",
-                  )}
-                  aria-hidden={product.id === active.id ? undefined : true}
-                />
-              ))}
-            </div>
-          </motion.div>
+          <FlavourScroller
+            activeId={active.id}
+            onChange={setActiveId}
+            priorityId="aminova-orange"
+            imageClassName="max-h-[min(560px,58vh)] w-auto max-w-full rounded-[1.7rem] object-contain shadow-[0_30px_70px_-28px_rgba(16,63,53,0.55)] lg:max-h-[min(740px,calc(100svh-8.5rem))]"
+          />
 
           <div className="mx-auto mt-4 flex w-full max-w-md items-end justify-between gap-4 px-1">
             <div>
               <p className="text-[0.68rem] font-bold tracking-[0.18em] text-forest/55 uppercase">Now pouring</p>
               <p className="font-display text-3xl text-forest">{active.flavourName}</p>
             </div>
-            <p className="text-right">
-              <span className="block font-display text-2xl text-forest tabular-nums">{formatINR(active.price)}</span>
-              <span className="text-sm text-ink/70">{active.proteinLabel} · {active.volumeLabel}</span>
+            <p className="pb-1 text-right text-sm text-ink/70">
+              {active.proteinLabel}
+              <span className="mx-1.5 text-forest/30" aria-hidden="true">
+                ·
+              </span>
+              {active.volumeLabel}
             </p>
           </div>
         </div>
