@@ -64,8 +64,8 @@ function TermsCopy() {
         three single bottles does not convert them into a Trio Pack.
       </p>
       <p>
-        Using the cart or the checkout form does not place an order. Payment and fulfilment are
-        not active, and no delivery timeline is offered.
+        The drinks are currently out of stock. Using the cart or the checkout page does not place
+        an order, and no delivery timeline is offered.
       </p>
       <p>
         The 15g protein figure follows the supplied bottle artwork. Other nutrition, ingredient,

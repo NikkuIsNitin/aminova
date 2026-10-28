@@ -64,6 +64,6 @@ export const faq = [
     id: "order",
     question: "How can I place an order?",
     answer:
-      "Add drinks to the cart and open checkout to review the order summary. Payment and order fulfilment are not connected on this storefront yet, so nothing is charged and no order is placed. A payment gateway and an order API need to be configured before a purchase can be completed.",
+      "Aminova is currently out of stock. You can browse the drinks and review a cart, but nothing can be purchased, nothing is charged, and no order is placed.",
   },
 ] as const

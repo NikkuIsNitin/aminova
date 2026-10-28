@@ -108,7 +108,7 @@ export function CartDrawer() {
               <span className="font-display text-3xl text-forest tabular-nums">{formatINR(subtotal)}</span>
             </div>
             <p className="mt-2 text-xs leading-relaxed text-ink/60">
-              Taxes and delivery are not calculated. Payment is not connected on this preview.
+              Currently out of stock. Checkout only reviews the cart. Nothing is charged.
             </p>
             <Button href="/checkout" className="mt-4 w-full" size="lg" onClick={closeCart}>
               Checkout
