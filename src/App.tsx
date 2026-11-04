@@ -16,6 +16,7 @@ export default function App() {
       <CartProvider>
         <BrowserRouter>
           <HashScroll />
+          <MetaPageView />
           <ScrollProgress />
           <a
             href="#main"
@@ -42,6 +43,27 @@ export default function App() {
       </CartProvider>
     </MotionConfig>
   )
+}
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+  }
+}
+
+function MetaPageView() {
+  const location = useLocation()
+  const first = useRef(true)
+
+  useEffect(() => {
+    if (first.current) {
+      first.current = false
+      return
+    }
+    window.fbq?.("track", "PageView")
+  }, [location.pathname])
+
+  return null
 }
 
 function HashScroll() {
